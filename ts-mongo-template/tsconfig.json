@@ -8,10 +8,6 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true,
-    // "paths": {
-    //   "@controllers/*": ["./src/controllers/*"],
-    //   "@routes/*": ["./src/routes/*"]
-    // },
     "lib": ["ES6", "DOM"],
     "skipLibCheck": true,
     "declaration": true,
