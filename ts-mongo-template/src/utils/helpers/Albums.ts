@@ -1,9 +1,14 @@
 import { Request, Response } from "express";
 import { BaseData } from "./BaseData";
+import { PrismaClient } from "@prisma/client";
 
 export class AlbumData extends BaseData {
+    private readonly prisma: PrismaClient;
+  
   constructor(model: any) {
     super(model, "Album");
+    this.prisma = new PrismaClient();
+
   }
 
   public async create(req: Request, res: Response) {
@@ -37,7 +42,7 @@ export class AlbumData extends BaseData {
   public async delete(req: Request, res: Response) {
     const { id } = req.params;
 
-    await this.model.$transaction(async (prisma: any) => {
+    await this.prisma.$transaction(async (prisma: any) => {
       await prisma.image.deleteMany({ where: { albumID: id } });
       await prisma.album.delete({ where: { id } });
     });

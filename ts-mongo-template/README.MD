@@ -40,8 +40,6 @@
 > **Note**:  
 > Worker functions should ideally run independently of the server. For production environments, ensure that they run on a separate server. For development purposes, these functions run as a different process managed by PM2.
 
-> Also to create another User you have to create other user related fields as well such as address, posts, images etc (see the sample data to get the reference)
-
 > User and it's address needs to be created together as user cannot be created without adding it's address and vice-versa.
 
 ---
