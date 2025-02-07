@@ -35,7 +35,7 @@ async function installFramworkforTS(
     const config = frameworks[packageName as Framework];
     s.start(config.message);
 
-    const command = `git clone --single-branch --branch ${config.branch} https://github.com/sidhxntt/FlashAPI.git . > /dev/null 2>&1`;
+    const command = `git clone --single-branch --branch ${config.branch} https://github.com/sidhxntt/CodeRush.git . > /dev/null 2>&1`;
 
     const child = spawn(command, {
       stdio: "inherit",
