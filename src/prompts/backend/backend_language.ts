@@ -1,6 +1,6 @@
 import * as p from "@clack/prompts";
-import { cancelOperation } from "../utils/cancelOperation";
-import {selectDBforTS, selectDBforJS} from "./backend_databases"
+import { cancelOperation } from "../../utils/cancelOperation";
+import { selectDBforJS, selectDBforTS } from "./backend_databases";
 
 export default async function backend_language(projectName: string) {
   const language = await p.select({

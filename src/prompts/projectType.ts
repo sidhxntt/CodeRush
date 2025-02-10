@@ -1,6 +1,7 @@
 import * as p from "@clack/prompts";
 import { cancelOperation } from "../utils/cancelOperation";
-import backend_language from "./backend_language";
+import frontend_technology from "./frontend/frontend_technology";
+import backend_language from "./backend/backend_language";
 
 export default async function selectProjectType(projectName: string) {
   const projectType = await p.select({
@@ -18,4 +19,8 @@ export default async function selectProjectType(projectName: string) {
   if (projectType === "backend") {
     await backend_language(projectName);
   }
+  else if (projectType === "frontend") {
+    await frontend_technology(projectName);
+  }
+ 
 }
