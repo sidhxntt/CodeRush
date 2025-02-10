@@ -1,7 +1,7 @@
 {
   "name": "ts-mongo-template",
   "version": "1.0.0",
-  "main": "server.ts",
+  "main": "./src/server.ts",
   "license": "MIT",
   "scripts": {
     "seed": "ts-node prisma/seeding/data.ts",
