@@ -6,10 +6,10 @@ export class ImageData extends BaseData {
   }
 
   async create(req, res) {
-    const { albumID, title, url, thumbnailUrl } = req.body;
+    const { albumId, title, url, thumbnailUrl } = req.body;
 
     const image = await this.model.create({
-      data: { albumID, title, url, thumbnailUrl },
+      data: { albumId, title, url, thumbnailUrl },
     });
 
     await this.clearModelCache();

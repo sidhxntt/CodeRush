@@ -6,10 +6,10 @@ export class TodoData extends BaseData {
   }
 
   async create(req, res) {
-    const { userID, title, completed } = req.body;
+    const { userId, title, completed } = req.body;
 
     const todo = await this.model.create({
-      data: { userID, title, completed },
+      data: { userId, title, completed },
     });
 
     await this.clearModelCache();

@@ -6,10 +6,10 @@ export class PostData extends BaseData {
   }
 
   async create(req, res) {
-    const { userID, title, body } = req.body;
+    const { userId, title, body } = req.body;
 
     const post = await this.model.create({
-      data: { userID, title, body },
+      data: { userId, title, body },
     });
 
     await this.clearModelCache();

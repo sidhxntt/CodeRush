@@ -1,8 +1,3 @@
-// Purpose: Main routes file to define all routes for the application. It imports all the sub-routes and initializes them.
-// This file is then imported in the server file to initialize all the routes.
-
-import users from "./users.js";
-import Api_user from "./API_user.js";
 import addresses from "./addresses.js";
 import posts from "./posts.js";
 import todos from "./todos.js";
@@ -10,7 +5,12 @@ import albums from "./albums.js";
 import home from "./home.js";
 import images from "./images.js";
 import promClient from "prom-client";
+import JWT from "../controllers/Authentication.js";
+import { setupOAuthRoutes } from "../controllers/google_&_github.js";
+import users from "./users.js";
+import { payments } from "../controllers/LemonSqueezy.js";
 
+const auth = new JWT()
 // Prometheus metrics
 promClient.collectDefaultMetrics();
 const getMetrics = async () => promClient.register.metrics();
@@ -27,8 +27,7 @@ class MainRoutes {
     this.app.use("/", home);
 
     // API routes
-    this.app.use(`${this.path}`, Api_user);
-    this.app.use(`${this.path}/users`, users);
+    this.app.use(`${this.path}`, users);
     this.app.use(`${this.path}/posts`, posts);
     this.app.use(`${this.path}/todos`, todos);
     this.app.use(`${this.path}/albums`, albums);
@@ -45,11 +44,22 @@ class MainRoutes {
         next(error);
       }
     });
+    // OAuth Routes
+    setupOAuthRoutes(this.app)
+
+    // JWT PAYLOAD CHECK ROUTE
+    this.app.get("/auth/check", auth.decryptJWT, (req, res) => {
+      res.json({ message: "You have access!", JWT_payload: req.user });
+    });
+
+    // Payment Route
+    payments(this.app)
 
     // Catch-all for undefined routes
     this.app.use("*", (_, res) => {
       res.status(404).json({ error: "Route not found" });
     });
+
   }
 }
 

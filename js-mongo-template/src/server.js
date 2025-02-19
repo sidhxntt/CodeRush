@@ -34,7 +34,13 @@ export default class SERVER {
       })
     ), // Enable CORS
 
-    this.app.use(express.json()); // Parse JSON bodies
+    this.app.use(express.json(
+      {
+        verify: (req, res, buf) => {
+          req.rawBody = buf;
+        }
+      }
+    )); // Parse JSON bodies
     this.app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
     this.app.use(helmet()); //security middleware
 
